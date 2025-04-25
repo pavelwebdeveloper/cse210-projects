@@ -6,33 +6,40 @@ class Program
     {
         Console.WriteLine("Hello World! This is the Exercise3 Project.");
 
-        Console.Write("What is the magic number? ");
-
-        string stringMagicNumber = Console.ReadLine();
-
-        int intMagicNumberFromUser = int.Parse(stringMagicNumber);
-
+        Random randomNumberObject = new Random();
+        string answerFromUser = "yes";
+        int magicNumber;
         string stringUserGuess;
         int intUserGuess;
+        int numberOfGuesses = 0;
 
-        do
+        while(answerFromUser == "yes")
         {
-            Console.Write("What is your guess? ");
+            magicNumber = randomNumberObject.Next(1, 100);
 
-            stringUserGuess = Console.ReadLine();
-
-            intUserGuess = int.Parse(stringUserGuess);
-
-            if(intMagicNumberFromUser > intUserGuess)
+            do
             {
-                Console.WriteLine("Higher");
-            } 
-            else if(intMagicNumberFromUser < intUserGuess)
-            {
-                Console.WriteLine("Lower");
-            }
-        }while(intMagicNumberFromUser != intUserGuess);
+                Console.Write("What is your guess for a magic number? ");
 
-        Console.WriteLine("You guessed it!");
+                stringUserGuess = Console.ReadLine();
+
+                intUserGuess = int.Parse(stringUserGuess);
+
+                numberOfGuesses++;
+
+                if(magicNumber > intUserGuess)
+                {
+                    Console.WriteLine("Higher");
+                } 
+                else if(magicNumber < intUserGuess)
+                {
+                    Console.WriteLine("Lower");
+                }
+            }while(magicNumber != intUserGuess);
+
+            Console.WriteLine($"You guessed it after {numberOfGuesses} guesses!");
+            Console.Write("Do you want to play again? ");
+            answerFromUser = Console.ReadLine();
+        }
     }
 }
