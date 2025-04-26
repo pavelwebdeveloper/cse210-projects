@@ -7,9 +7,7 @@ class Program
         Console.WriteLine("Hello World! This is the Exercise2 Project.");
 
         Console.Write("What is your grade percentage? ");
-
         string stringGradePercentage = Console.ReadLine();
-
         int numberGradePercentage = int.Parse(stringGradePercentage);
 
         string letter;

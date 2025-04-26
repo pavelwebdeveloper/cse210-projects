@@ -20,9 +20,7 @@ class Program
             do
             {
                 Console.Write("What is your guess for a magic number? ");
-
                 stringUserGuess = Console.ReadLine();
-
                 intUserGuess = int.Parse(stringUserGuess);
 
                 numberOfGuesses++;
@@ -38,6 +36,7 @@ class Program
             }while(magicNumber != intUserGuess);
 
             Console.WriteLine($"You guessed it after {numberOfGuesses} guesses!");
+            
             Console.Write("Do you want to play again? ");
             answerFromUser = Console.ReadLine();
         }

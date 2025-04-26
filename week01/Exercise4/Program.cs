@@ -21,15 +21,17 @@ class Program
             Console.Write("Enter number: ");
             stringNumber = Console.ReadLine();
             number = int.Parse(stringNumber);
+
             if(number != 0)
             {
                 numbersFromUser.Add(number);
             }
+
         }while(number != 0);
 
         foreach(int listNumber in numbersFromUser)
         {
-            sum+=listNumber;
+            sum += listNumber;
             
             if(listNumber > maxValue)
             {
