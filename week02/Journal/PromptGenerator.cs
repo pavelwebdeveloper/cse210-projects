@@ -12,6 +12,9 @@ public class PromptGenerator
 
     public string GetRandomPrompt()
     {
-        return "";
+        Random random = new();
+        string prompt = _prompts[random.Next(_prompts.Count)];
+        Console.WriteLine($"{prompt}");
+        return prompt;
     }
 }

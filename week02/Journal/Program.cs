@@ -21,14 +21,39 @@ class Program
 
     static void ProcessAnswer(int answer, Journal journal)
     {
-        
+        switch(answer)
+        {
+            case 1:
+                Entry entry = new Entry();
+                DateTime dateTime = DateTime.Now;
+                entry._date = dateTime.ToShortDateString();
+                PromptGenerator promptGenerator = new PromptGenerator();
+                entry._prompt = promptGenerator.GetRandomPrompt();
+                entry._text = Console.ReadLine();
+                journal.AddEntry(entry);
+            break;
+            case 2:
+                journal.DisplayAll();
+            break;
+            case 3:
+                Console.WriteLine("What is the file name?");
+                string loadFileName = Console.ReadLine();
+                journal.LoadFromFile(loadFileName);
+            break;
+            case 4:
+                Console.WriteLine("What is the file name?");
+                string fileName = Console.ReadLine();
+                journal.SaveToFile(fileName);
+            break;
+            case 5:
+            break;
+        }
     }
 
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Journal Project.");
-
+        Console.WriteLine("Welcome to the Journal Program!");
         Journal journal = new Journal();
         int answer;
         do
