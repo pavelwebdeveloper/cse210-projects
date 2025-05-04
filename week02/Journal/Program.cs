@@ -1,15 +1,18 @@
 using System;
 using System.IO;
+using System.Transactions;
 
 // Resources used:
 // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers
 // https://learn.microsoft.com/en-us/dotnet/api/system.random.next?view=net-9.0#system-random-next
 // https://www.w3schools.com/cs/cs_switch.php
 
+
 class Program
 {
     static void ShowMenu()
     {
+        Console.WriteLine();
         Console.WriteLine("Please select one of the following choices:");
         Console.WriteLine("1. Write");
         Console.WriteLine("2. Display");
@@ -33,7 +36,19 @@ class Program
                 journal.AddEntry(entry);
             break;
             case 2:
-                journal.DisplayAll();
+                if(journal._entries.Count == 0 && answer == 2)
+                {
+                    // this code exceeds the core requirements and shows some messages if 
+                    // the program does not have any entries to display yet
+                    Console.WriteLine();
+                    Console.WriteLine("Sorry, no entries to display yet.");
+                    Console.WriteLine("Please, either input an entry or load from a file.");
+                    Console.WriteLine();
+                } else 
+                {
+                    journal.DisplayAll();
+                }
+                
             break;
             case 3:
                 Console.WriteLine("What is the file name?");
@@ -53,14 +68,27 @@ class Program
 
     static void Main(string[] args)
     {
+        Console.WriteLine();
         Console.WriteLine("Welcome to the Journal Program!");
         Journal journal = new Journal();
-        int answer;
+        string answer;
+        int intAnswer = 0;
         do
         {
         ShowMenu();
-        answer = int.Parse(Console.ReadLine());
-        ProcessAnswer(answer, journal);
-        }while(answer != 5);
+        answer = Console.ReadLine();
+        if(answer == "1" || answer == "2" || answer == "3" || answer == "4" || answer == "5")
+            {
+                intAnswer = int.Parse(answer);
+                ProcessAnswer(intAnswer, journal);
+            } else 
+            {
+                // This code exceeds the core requirements and displays a message if a user
+                // entered something other than the numbers 1 through 5
+                    Console.WriteLine();
+                    Console.WriteLine("Please, enter an intiger between 1 and 5");
+                    Console.WriteLine();
+            }
+        }while(intAnswer != 5);
     }
 }
