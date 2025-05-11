@@ -3,17 +3,24 @@
 public class Scripture
 {
     private Reference _reference;
-    private List<Word> _words = new List<Word>();
+    private List<Word> _words;
 
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
+        _words = TransformTextIntoListOfWords(text);
+    }
+
+    private List<Word> TransformTextIntoListOfWords(string text)
+    {
         string[] textArray = text.Split(" ");
+        List<Word> _words = new List<Word>();
         foreach(string stringWord in textArray)
         {
             Word word = new Word(stringWord);
             _words.Add(word);
         }
+        return _words;
     }
 
     public void HideRandomWords(Random random)
