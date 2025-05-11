@@ -8,10 +8,10 @@ public class Scripture
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
-        _words = TransformTextIntoListOfWords(text);
+        _words = TransformTextIntoListOfWordObjects(text);
     }
 
-    private List<Word> TransformTextIntoListOfWords(string text)
+    private List<Word> TransformTextIntoListOfWordObjects(string text)
     {
         string[] textArray = text.Split(" ");
         List<Word> _words = new List<Word>();
