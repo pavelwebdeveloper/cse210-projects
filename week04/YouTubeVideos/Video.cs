@@ -33,15 +33,15 @@ public class Video
         Console.WriteLine($"Length in seconds: {_lengthInSeconds}");
         Console.WriteLine($"Number of comments: {NumberOfComments()}");
         Console.WriteLine();
-        if(NumberOfComments() > 0)
+        if (NumberOfComments() > 0)
         {
             Console.WriteLine($"    Comments for {_title} video: ");
         }
         Console.WriteLine();
-        foreach(Comment comment in _comments)
+        foreach (Comment comment in _comments)
         {
             comment.DisplayComment();
-            Console.WriteLine();
         }
+        Console.WriteLine();
     }
 }

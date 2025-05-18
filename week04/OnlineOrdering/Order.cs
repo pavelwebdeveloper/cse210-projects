@@ -15,16 +15,16 @@ public class Order
         _products.Add(product);
     }
 
-    public double OrderTotalPrice()
+    public double OrderTotalCost()
     {
-        double totalPrice = 0;
+        double orderTotalCost = 0;
 
         foreach(Product product in _products)
         {
-            totalPrice += product.TotalCost();
+            orderTotalCost += product.TotalCost();
         }
 
-        return totalPrice + OneTimeShippingCost();
+        return orderTotalCost + OneTimeShippingCost();
     }
 
     private double OneTimeShippingCost()
@@ -41,10 +41,9 @@ public class Order
     public string PackingLabel()
     {
         string packingLabel = "";
-        packingLabel += $"Customer name: {_customer.GetCustomerName()}\r\n";
         foreach(Product product in _products)
         {
-            packingLabel += $"Product id: {product.GetProductId()}\r\n";
+            packingLabel += $"Product name: {product.GetProductName()}           Product id: {product.GetProductId()}\r\n";
         }
         return packingLabel;
     }

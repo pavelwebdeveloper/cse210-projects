@@ -45,11 +45,14 @@ class Program
         {
             Console.WriteLine($"     Order #{numberOfOrder}     ");
             Console.WriteLine();
+            Console.WriteLine($"Order {numberOfOrder} packing label:");
+            Console.WriteLine();
             Console.WriteLine(order.PackingLabel());
+            Console.WriteLine($"Order {numberOfOrder} shipping label:");
+            Console.WriteLine();
             Console.WriteLine(order.ShipingLabel());
             Console.WriteLine();
-            Console.WriteLine($"Total price of the order is {order.OrderTotalPrice()} $");
-            Console.WriteLine();
+            Console.WriteLine($"Total cost of the order {numberOfOrder} is {order.OrderTotalCost()} $");
             Console.WriteLine();
             Console.WriteLine();
 

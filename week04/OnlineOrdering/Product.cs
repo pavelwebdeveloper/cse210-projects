@@ -20,6 +20,11 @@ public class Product
         return _price * _productQuantity;
     }
 
+    public string GetProductName()
+    {
+        return _productName;
+    }
+
     public int GetProductId()
     {
         return _productId;
