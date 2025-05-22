@@ -2,7 +2,7 @@
 
 public class ListingActivity : Activity
 {
-    public ListingActivity(string name, string description) : base(name, description)
+    public ListingActivity(string name, string description, List<string> prompts) : base(name, description, prompts)
     {
 
     }
