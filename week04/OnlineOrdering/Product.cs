@@ -30,4 +30,9 @@ public class Product
         return _productId;
     }
 
+    public string ProductInformation()
+    {
+        return $"Product name: {_productName}           Product id: {_productId}";
+    }
+
 }

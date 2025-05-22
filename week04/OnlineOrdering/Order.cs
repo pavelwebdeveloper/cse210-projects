@@ -41,9 +41,9 @@ public class Order
     public string PackingLabel()
     {
         string packingLabel = "";
-        foreach(Product product in _products)
+        foreach (Product product in _products)
         {
-            packingLabel += $"Product name: {product.GetProductName()}           Product id: {product.GetProductId()}\r\n";
+            packingLabel += $"{product.ProductInformation()}\r\n";
         }
         return packingLabel;
     }
