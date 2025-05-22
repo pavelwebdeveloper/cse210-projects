@@ -105,4 +105,12 @@ public class Activity
         DateTime futureTime = startTime.AddSeconds(lengthOfAnimationInSeconds);
         return futureTime;
     }
+
+    public string GenerateAndShowPrompt()
+    {
+        PromptGenerator promptGenerator = new PromptGenerator(GetPrompts());
+        string prompt = promptGenerator.GetRandomPrompt();
+        Console.WriteLine($" --- {prompt} --- ");
+        return prompt;
+    }
 }

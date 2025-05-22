@@ -16,8 +16,7 @@ public class ReflectionActivity : Activity
     {
         Console.WriteLine("Consider the following prompt:");
         Console.WriteLine();
-        PromptGenerator promptGenerator = new PromptGenerator(base.GetPrompts());
-        Console.WriteLine($" --- {promptGenerator.GetRandomPrompt()} --- ");
+        GenerateAndShowPrompt();
         Console.WriteLine();
         Console.WriteLine("When you have something in mind, press enter to continue.");
         string emptyInput = Console.ReadLine();
