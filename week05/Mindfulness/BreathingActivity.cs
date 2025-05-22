@@ -10,7 +10,7 @@ public class BreathingActivity : Activity
     public void DisplayBreathInBreathOutMessages()
     {
 
-        for (int i = 0; i <= GetActivityDuaration(); i += 10)
+        for (int i = 0; i <= GetActivityDuaration(); i += 8)
         {
             Console.Write("Breathe in...");
             ShowAnimation(3, "counter");

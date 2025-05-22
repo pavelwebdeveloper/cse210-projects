@@ -5,11 +5,19 @@ public class Activity
     private string _name;
     private string _description;
     private int _durationOfActivityInSeconds;
+    private List<string> _prompts;
 
     public Activity(string name, string description)
     {
         _name = name;
         _description = description;
+    }
+
+    public Activity(string name, string description, List<string> prompts)
+    {
+        _name = name;
+        _description = description;
+        _prompts = prompts;
     }
 
     public void DisplayStartingMessage()
@@ -33,6 +41,11 @@ public class Activity
         return _durationOfActivityInSeconds;
     }
 
+    public List<string> GetPrompts()
+    {
+        return _prompts;
+    }
+
     public void StartActivity()
     {
         Console.Clear();
@@ -44,6 +57,7 @@ public class Activity
 
     public void FinishActivity()
     {
+        Console.WriteLine();
         Console.WriteLine("Well done!!");
         ShowAnimation(8, "spinner");
         Console.WriteLine();
@@ -53,8 +67,7 @@ public class Activity
 
     protected void ShowAnimation(int lengthOfAnimationInSeconds, string kindOfAnimation)
     {
-        DateTime startTime = DateTime.Now;
-        DateTime futureTime = startTime.AddSeconds(lengthOfAnimationInSeconds);
+        DateTime finishTime = GetActivityFinishTimeBasedOnDuration(lengthOfAnimationInSeconds);
 
         if (kindOfAnimation == "spinner")
         {
@@ -62,7 +75,7 @@ public class Activity
 
             int i = 0;
 
-            while (DateTime.Now < futureTime)
+            while (DateTime.Now < finishTime)
             {
                 string spin = spins[i++];
                 Console.Write(spin);
@@ -84,5 +97,12 @@ public class Activity
                 Console.Write("\b \b");
             }
         }
+    }
+
+    public DateTime GetActivityFinishTimeBasedOnDuration(int lengthOfAnimationInSeconds)
+    {
+        DateTime startTime = DateTime.Now;
+        DateTime futureTime = startTime.AddSeconds(lengthOfAnimationInSeconds);
+        return futureTime;
     }
 }
