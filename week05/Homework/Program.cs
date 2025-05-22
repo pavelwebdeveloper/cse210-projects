@@ -1,5 +1,8 @@
 using System;
 
+// Used resources
+// https://learn.microsoft.com/en-us/dotnet/api/system.string.join?view=net-9.0
+
 class Program
 {
     static void Main(string[] args)
