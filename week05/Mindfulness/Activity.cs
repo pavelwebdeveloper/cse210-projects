@@ -5,19 +5,12 @@ public class Activity
     private string _name;
     private string _description;
     private int _durationOfActivityInSeconds;
-    private List<string> _prompts;
+    
 
     public Activity(string name, string description)
     {
         _name = name;
         _description = description;
-    }
-
-    public Activity(string name, string description, List<string> prompts)
-    {
-        _name = name;
-        _description = description;
-        _prompts = prompts;
     }
 
     public void DisplayStartingMessage()
@@ -41,21 +34,15 @@ public class Activity
         return _durationOfActivityInSeconds;
     }
 
-    public List<string> GetPrompts()
-    {
-        return _prompts;
-    }
-
     public void StartActivity()
     {
         Console.Clear();
         Console.WriteLine("Get ready...");
         ShowAnimation(8, "spinner");
         Console.WriteLine();
-        Console.WriteLine();
     }
 
-    public void FinishActivity()
+    public void DisplayEndingMessage()
     {
         Console.WriteLine();
         Console.WriteLine("Well done!!");
@@ -106,11 +93,4 @@ public class Activity
         return futureTime;
     }
 
-    public string GenerateAndShowPrompt()
-    {
-        PromptGenerator promptGenerator = new PromptGenerator(GetPrompts());
-        string prompt = promptGenerator.GetRandomPrompt();
-        Console.WriteLine($" --- {prompt} --- ");
-        return prompt;
-    }
 }

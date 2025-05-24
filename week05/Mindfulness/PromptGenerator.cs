@@ -11,11 +11,18 @@ public class PromptGenerator
         _prompts = prompts;
     }
 
+    public string GenerateAndShowPrompt()
+    {
+        
+        string prompt = GetRandomPrompt();
+        Console.WriteLine($" --- {prompt} --- ");
+        return prompt;
+    }
+
     public string GetRandomPrompt()
     {
         Random random = new();
         string prompt = _prompts[random.Next(_prompts.Count)];
-        //Console.WriteLine($"{prompt}");
         return prompt;
     }
 }

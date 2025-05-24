@@ -7,18 +7,23 @@ public class BreathingActivity : Activity
 
     }
 
-    public void DisplayBreathInBreathOutMessages()
+    public void Run()
     {
+        DisplayStartingMessage();
+
+        StartActivity();
 
         for (int i = 0; i <= GetActivityDuaration(); i += 8)
         {
             Console.Write("Breathe in...");
             ShowAnimation(3, "counter");
             Console.WriteLine();
-            Console.Write("Breathe out...");
+            Console.Write("Now breathe out...");
             ShowAnimation(5, "counter");
             Console.WriteLine();
             Console.WriteLine();
         }
+
+        DisplayEndingMessage();
     }
 }

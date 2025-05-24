@@ -9,8 +9,6 @@ class Program
         Console.WriteLine(" 2. Start reflecting activity");
         Console.WriteLine(" 3. Start listing activity");
         Console.WriteLine(" 4. Quit");
-        Console.WriteLine();
-
     }
 
     static void ProcessingUserChoice(string choice)
@@ -19,51 +17,18 @@ class Program
         {
             case 1:
                 Console.Clear();
-                StartBreathingActivity();
+                BreathingActivity breathingActivity = new BreathingActivity("Breathing", "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
+                breathingActivity.Run();
                 break;
             case 2:
-                StartReflectingActivity();
+                ReflectionActivity reflectionActivity = new ReflectionActivity("Reflection", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
+                reflectionActivity.Run();
                 break;
             case 3:
-                StartListingActivity();
+                ListingActivity listingActivity = new ListingActivity("Listing", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
+                listingActivity.Run();
                 break;
         }
-    }
-
-    static void StartBreathingActivity()
-    {
-        BreathingActivity breathingActivity = new BreathingActivity("Breathing", "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
-        breathingActivity.DisplayStartingMessage();
-        breathingActivity.StartActivity();
-        breathingActivity.DisplayBreathInBreathOutMessages();
-        breathingActivity.FinishActivity();
-
-    }
-
-    static void StartReflectingActivity()
-    {
-        List<string> prompts = new List<string> {"Think of a time when you stood up for someone else.",
-        "Think of a time when you did something really difficult.", "Think of a time when you helped someone in need.",
-        "Think of a time when you did something truly selfless."};
-        ReflectionActivity reflectionActivity = new ReflectionActivity("Reflection", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.", prompts);
-        reflectionActivity.DisplayStartingMessage();
-        reflectionActivity.StartActivity();
-        reflectionActivity.DisplayPromptForReflections();
-        reflectionActivity.ProvidingQuestionsForReflection();
-        reflectionActivity.FinishActivity();
-
-    }
-
-    static void StartListingActivity()
-    {
-        List<string> prompts = new List<string> {"Who are people that you appreciate?", "What are personal strengths of yours?",
-        "Who are people that you have helped this week?", "When have you felt the Holy Ghost this month?",
-        "Who are some of your personal heroes?"};
-        ListingActivity listingActivity = new ListingActivity("Listing", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.", prompts);
-        listingActivity.DisplayStartingMessage();
-        listingActivity.StartActivity();
-        listingActivity.ShowPromptForListingAndProcessListing();
-        listingActivity.FinishActivity();
     }
 
     static void Main(string[] args)
