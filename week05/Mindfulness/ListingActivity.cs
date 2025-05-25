@@ -44,12 +44,15 @@ public class ListingActivity : Activity
     private void SaveListFromUser(string prompt)
     {
         DateTime finishTime = GetActivityFinishTimeBasedOnDuration(GetActivityDuaration());
-        using StreamWriter outputFile = new StreamWriter("listing_results.txt");
+
+        
+        using StreamWriter outputFile = new StreamWriter("listing_results.txt", File.Exists("listing_results.txt"));
 
         string time = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
         outputFile.WriteLine();
         outputFile.WriteLine(time);
         outputFile.WriteLine(prompt);
+
 
         while (DateTime.Now < finishTime)
         {

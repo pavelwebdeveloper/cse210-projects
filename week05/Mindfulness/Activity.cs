@@ -66,10 +66,10 @@ public class Activity
             {
                 string spin = spins[i++];
                 Console.Write(spin);
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 Console.Write("\b \b");
 
-                if (i > spins.Count)
+                if (i >= spins.Count)
                 {
                     i = 0;
                 }

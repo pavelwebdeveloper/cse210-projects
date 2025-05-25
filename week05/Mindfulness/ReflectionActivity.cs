@@ -54,7 +54,7 @@ public class ReflectionActivity : Activity
         {
             string question = _questions[i++];
             Console.Write($" > {question} ");
-            ShowAnimation(5, "spinner");
+            ShowAnimation(10, "spinner");
             Console.WriteLine();
 
             if (i >= _questions.Count)

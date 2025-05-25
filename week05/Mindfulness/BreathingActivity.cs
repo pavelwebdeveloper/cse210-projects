@@ -13,13 +13,13 @@ public class BreathingActivity : Activity
 
         StartActivity();
 
-        for (int i = 0; i <= GetActivityDuaration(); i += 8)
+        for (int i = 0; i < GetActivityDuaration(); i += 10)
         {
             Console.Write("Breathe in...");
-            ShowAnimation(3, "counter");
+            ShowAnimation(4, "counter");
             Console.WriteLine();
             Console.Write("Now breathe out...");
-            ShowAnimation(5, "counter");
+            ShowAnimation(6, "counter");
             Console.WriteLine();
             Console.WriteLine();
         }
