@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 
 class Program
 {
@@ -152,17 +153,30 @@ class Program
 
         DisplayPoints(0);
     }
-    
+
     static void SaveToFile(string fileName, List<Goal> _goals)
     {
-        using (StreamWriter outputFile = new StreamWriter(fileName))
+        /*using (StreamWriter outputFile = new StreamWriter(fileName))
         {
             for (int i = 0; i < _goals.Count; i++)
             {
                 outputFile.WriteLine(_goals[i].GoalInformation());
                 outputFile.WriteLine();
             }
+        }*/
+        /*using StreamWriter outputFile = new StreamWriter(fileName);
+        outputFile.WriteLine(JsonSerializer.Serialize(_goals));*/
+        using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+            for (int i = 0; i < _goals.Count; i++)
+            {
+                string jsonString = JsonSerializer.Serialize(_goals[i]);
+                Console.WriteLine(jsonString);
+                Thread.Sleep(10000);
+                outputFile.WriteLine(jsonString);
+            }
         }
+        
     }
 
     static void ProcessingUserChoice(string choice, List<Goal> goals)
