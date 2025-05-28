@@ -4,7 +4,6 @@ public abstract class Goal
     private string _nameOfGoal;
     private string _descriptionOfGoal;
     private int _amountOfPoints;
-
     private bool _achievedStatus;
 
     public Goal(string name, string description, int points)
@@ -12,6 +11,7 @@ public abstract class Goal
         _nameOfGoal = name;
         _descriptionOfGoal = description;
         _amountOfPoints = points;
+        _achievedStatus = false;
     }
 
     public string GetNameOfGoal()
@@ -29,10 +29,14 @@ public abstract class Goal
         return _amountOfPoints;
     }
 
-    public bool GetAchievedStatus()
+    public string GetAchievedStatus()
     {
-        return _achievedStatus;
+        return (_achievedStatus == true) ? "X" : " ";
     }
 
-    public abstract void DisplayGoal();
+    public virtual string GoalInformation()
+    {
+        
+        return $"[{GetAchievedStatus()}] {GetNameOfGoal()} ({GetDescriptionOfGoal()})";
+    }
 }

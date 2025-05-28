@@ -5,8 +5,5 @@ public class SimpleGoal : Goal
     {
        
     }
-    public override void DisplayGoal()
-    {
-        Console.WriteLine($"[{GetAchievedStatus}] {GetNameOfGoal} ({GetDescriptionOfGoal})");
-    }
+    
 }

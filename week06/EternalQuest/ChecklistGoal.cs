@@ -1,16 +1,19 @@
 
 public class ChecklistGoal : Goal
 {
-    private int _timesOfAccomplishmentOfGoal;
+    private int _timesOfAccomplishment;
 
-    private int _bonusForAccomplishments;
-    public ChecklistGoal(string name, string description, int points, int timesOfAccomplishment, int bonusForAccomplishments) : base(name, description, points)
+    private int _totalTimesToAccomplish;
+
+    private int _bonusForAccomplishment;
+    public ChecklistGoal(string name, string description, int points, int timesToAccomplish, int bonusForAccomplishment) : base(name, description, points)
     {
-        _timesOfAccomplishmentOfGoal = timesOfAccomplishment;
-        _bonusForAccomplishments = bonusForAccomplishments;
+        _timesOfAccomplishment = 0;
+        _totalTimesToAccomplish = timesToAccomplish;
+        _bonusForAccomplishment = bonusForAccomplishment;
     }
-    public override void DisplayGoal()
+    public override string GoalInformation()
     {
-        Console.WriteLine($"[{GetAchievedStatus}] {GetNameOfGoal} ({GetDescriptionOfGoal})");
+        return $"[{GetAchievedStatus()}] {GetNameOfGoal()} ({GetDescriptionOfGoal()}) -- Currently completed: {_timesOfAccomplishment}/{_totalTimesToAccomplish}";
     }
 }
