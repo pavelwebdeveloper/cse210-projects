@@ -23,9 +23,9 @@ public class ChecklistGoal : Goal
         return _timesOfAccomplishment;
     }
 
-    public void SetTimesOfAccomplishment(int timesOfAccomplishment)
+    public override void UpdateTimesOfAccomplishment(int timesOfAccomplishment)
     {
-        _timesOfAccomplishment = timesOfAccomplishment;
+        _timesOfAccomplishment += timesOfAccomplishment;
     }
 
     public int GetTotalTimesToAccomplish()

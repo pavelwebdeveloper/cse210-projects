@@ -3,20 +3,32 @@ using System.Text.Json;
 
 class Program
 {
-    static List<Goal> _goals = new List<Goal>();
-    static int _totalPoints = 0;
+    private static List<Goal> _goals = new List<Goal>();
+    private static int _totalPoints = 0;
 
-    static string nameOfFile;
+    private static string nameOfFile;
 
-    static void SetTotalPoints(string points)
+    static void SetOrUpdateTotalPoints(int points)
     {
-        _totalPoints = int.Parse(points);
+        _totalPoints += points;
     }
 
-    static void DisplayTotalPoints(int points)
+    static int GetTotalPoints()
+    {
+        return _totalPoints;
+    }
+
+    static void DisplayTotalPoints(int points, bool afterGoalAccomplishment = false)
     {
         Console.WriteLine();
-        Console.WriteLine($"You have {points} points");
+        if (afterGoalAccomplishment)
+        {
+            Console.WriteLine($"You now have {points} points");
+        }
+        else
+        {
+            Console.WriteLine($"You have {points} points");
+        }
         Console.WriteLine();
     }
     static void DisplayMenu()
@@ -182,11 +194,13 @@ class Program
 
     }
 
-    static void DisplayGoalsList()
+    static void DisplayGoalsList(bool toRecordEvent = false)
     {
         if (_goals.Count == 0)
         {
+            Console.WriteLine();
             Console.Write($"You have no goals yet.");
+            Console.WriteLine();
         }
         else
         {
@@ -194,10 +208,16 @@ class Program
 
             for (int i = 0; i < _goals.Count; i++)
             {
-                Console.Write($"{i + 1} ");
-                Console.WriteLine($"{_goals[i].GoalInformationForDisplay()}");
+                Console.Write($"{i + 1}. ");
+                if (toRecordEvent)
+                {
+                    Console.WriteLine($"{_goals[i].GetNameOfGoal()}");
+                }
+                else
+                {
+                    Console.WriteLine($"{_goals[i].GoalInformationForDisplay()}");
+                }
                 Console.WriteLine();
-                
             }
         }
 
@@ -221,7 +241,7 @@ class Program
     {
         string[] lines = System.IO.File.ReadAllLines(fileName);
 
-        SetTotalPoints(lines[0]);
+        SetOrUpdateTotalPoints(int.Parse(lines[0]));
 
         for (int i = 1; i < lines.Length; i++)
         {
@@ -238,9 +258,27 @@ class Program
         return fileName;
     }
 
+    static void RecordEvent()
+    {
+        DisplayGoalsList(true);
+        Console.Write("Which goal did you accomplish? ");
+        int accomplishedGoalNumber = int.Parse(Console.ReadLine());
+        Console.Write($"Congratulations! You have earned {_goals[accomplishedGoalNumber - 1].GetAmountOfPoints()} points!");
+        SetOrUpdateTotalPoints(_goals[accomplishedGoalNumber - 1].GetAmountOfPoints());
+        DisplayTotalPoints(GetTotalPoints(), true);
+        if (_goals[accomplishedGoalNumber - 1].GetType().Name == "ChecklistGoal")
+        {
+            _goals[accomplishedGoalNumber - 1].UpdateTimesOfAccomplishment(accomplishedGoalNumber);
+        }
+        _goals[accomplishedGoalNumber - 1].SetAchievedStatus(true);
+        /*Console.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        Console.WriteLine(_goals[accomplishedGoalNumber - 1].GetType());
+        Console.WriteLine("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");*/
+    }
+
     static void ProcessingUserChoice(string choice)
     {
-        
+
 
         switch (int.Parse(choice))
         {
@@ -261,8 +299,7 @@ class Program
                 Console.Clear();
                 break;
             case 5:
-
-                Console.Clear();
+                RecordEvent();
                 break;
             case 6:
 
@@ -286,6 +323,7 @@ class Program
             DisplayMenu();
             Console.Write("Select a choice from the menu: ");
             userChoice = Console.ReadLine();
+            Console.Clear();
             if (userChoice == "1" || userChoice == "2" || userChoice == "3" || userChoice == "4" || userChoice == "5")
             {
                 ProcessingUserChoice(userChoice);

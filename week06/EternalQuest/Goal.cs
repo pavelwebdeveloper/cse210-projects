@@ -53,7 +53,7 @@ public abstract class Goal
         return _achievedStatus;
     }
 
-    public void SetAchievedStatus(bool status)
+    public virtual void SetAchievedStatus(bool status)
     { 
             _achievedStatus = status;
     }
@@ -62,6 +62,11 @@ public abstract class Goal
     {
         string achieved = (GetAchievedStatus()) ? "X" : " ";
         return $"[{achieved}] {GetNameOfGoal()} ({GetDescriptionOfGoal()})";
+    }
+
+    public virtual void UpdateTimesOfAccomplishment(int timesOfAccomplishment)
+    {
+        
     }
 
     public abstract string PrepareGoalToSaveToTxtFile();

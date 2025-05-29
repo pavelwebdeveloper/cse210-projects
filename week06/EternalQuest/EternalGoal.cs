@@ -5,6 +5,11 @@ public class EternalGoal : Goal
     {
 
     }
+
+    public override void SetAchievedStatus(bool status)
+    { 
+        
+    }
     
     public override string PrepareGoalToSaveToTxtFile()
     {
