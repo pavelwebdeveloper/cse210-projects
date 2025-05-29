@@ -12,9 +12,10 @@ public class ChecklistGoal : Goal
         _totalTimesToAccomplish = timesToAccomplish;
         _bonusForAccomplishment = bonusForAccomplishment;
     }
-    public override string GoalInformation()
+    public override string GoalInformationForDisplay()
     {
-        return $"[{GetAchievedStatus()}] {GetNameOfGoal()} ({GetDescriptionOfGoal()}) -- Currently completed: {_timesOfAccomplishment}/{_totalTimesToAccomplish}";
+        string achieved = (GetAchievedStatus()) ? "X" : " ";
+        return $"[{achieved}] {GetNameOfGoal()} ({GetDescriptionOfGoal()}) -- Currently completed: {_timesOfAccomplishment}/{_totalTimesToAccomplish}";
     }
 
     public int GetTimesOfAccomplishment()
@@ -49,7 +50,7 @@ public class ChecklistGoal : Goal
 
     public override string PrepareGoalToSaveToTxtFile()
     {
-        return $"Checklist goal: {GetAchievedStatus()} {GetNameOfGoal()} {GetDescriptionOfGoal()} {GetAmountOfPoints()} {GetTimesOfAccomplishment()} {GetTotalTimesToAccomplish()} {GetBonusForAccomplishment()}";
+        return $"Checklist goal: {GetAchievedStatus()}, {GetNameOfGoal()}, {GetDescriptionOfGoal()}, {GetAmountOfPoints()}, {GetTimesOfAccomplishment()}, {GetTotalTimesToAccomplish()}, {GetBonusForAccomplishment()}";
     }
 
 }

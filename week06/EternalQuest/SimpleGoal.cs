@@ -8,7 +8,7 @@ public class SimpleGoal : Goal
 
     public override string PrepareGoalToSaveToTxtFile()
     {
-        return $"Simple goal: {GetAchievedStatus()} {GetNameOfGoal()} {GetDescriptionOfGoal()} {GetAmountOfPoints()}";
+        return $"Simple goal: {GetAchievedStatus()}, {GetNameOfGoal()}, {GetDescriptionOfGoal()}, {GetAmountOfPoints()}";
     }
     
 }

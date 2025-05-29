@@ -48,27 +48,20 @@ public abstract class Goal
     }
     
 
-    public string GetAchievedStatus()
+    public bool GetAchievedStatus()
     {
-        return (_achievedStatus == true) ? "X" : " ";
+        return _achievedStatus;
     }
 
-    public void SetAchievedStatus(string status)
-    {
-        if (status == "X")
-        {
-            _achievedStatus = true;
-        }
-        else if (status == " ")
-        {
-            _achievedStatus = false;
-        }
+    public void SetAchievedStatus(bool status)
+    { 
+            _achievedStatus = status;
     }
 
-    public virtual string GoalInformation()
+    public virtual string GoalInformationForDisplay()
     {
-
-        return $"[{GetAchievedStatus()}] {GetNameOfGoal()} ({GetDescriptionOfGoal()})";
+        string achieved = (GetAchievedStatus()) ? "X" : " ";
+        return $"[{achieved}] {GetNameOfGoal()} ({GetDescriptionOfGoal()})";
     }
 
     public abstract string PrepareGoalToSaveToTxtFile();

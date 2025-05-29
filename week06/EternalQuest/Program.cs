@@ -3,7 +3,17 @@ using System.Text.Json;
 
 class Program
 {
-    static void DisplayPoints(int points)
+    static List<Goal> _goals = new List<Goal>();
+    static int _totalPoints = 0;
+
+    static string nameOfFile;
+
+    static void SetTotalPoints(string points)
+    {
+        _totalPoints = int.Parse(points);
+    }
+
+    static void DisplayTotalPoints(int points)
     {
         Console.WriteLine();
         Console.WriteLine($"You have {points} points");
@@ -20,46 +30,89 @@ class Program
         Console.WriteLine(" 6. Quit");
     }
 
-    public static void CreateGoal(string typeOfGoal, List<Goal> goals)
+    public static void CreateGoal(string typeOfGoal, string goalString = "")
     {
-        Console.Write("What is the name of your goal? ");
-        string nameOfGoal = Console.ReadLine();
+        string[] goalStringArray = goalString.Split(", ");
 
-        Console.Write("What is the short description of it? ");
-        string descriptionOfGoal = Console.ReadLine();
+        bool status;
+        string nameOfGoal;
+        string descriptionOfGoal;
+        int amountOfPoints;
+        int timesOfAccomplishment = 0;
+                int timesToAccomplish = 0;
+                int bonusForAccomplishment = 0;
 
-        Console.Write("What is the amount of points associated with this goal? ");
-        int amountOfPoints = int.Parse(Console.ReadLine());
 
-        int timesToAccomplish = 0;
-        int bonusForAccomplishment = 0;
-
-        if (typeOfGoal == "3")
+        if (goalString.Length > 0)
         {
-            Console.Write("Howe many time does this goal need to be accomplished for a bonus? ");
-            timesToAccomplish = int.Parse(Console.ReadLine());
+            if (goalStringArray[0] == "true")
+            {
+                status = true;
+            }
+            else
+            {
+                status = false;
+            }
 
-            Console.Write("What is the bonus for accomplishing it that many times? ");
-            bonusForAccomplishment = int.Parse(Console.ReadLine());
+            nameOfGoal = goalStringArray[1];
+            descriptionOfGoal = goalStringArray[2];
+            amountOfPoints = int.Parse(goalStringArray[3]);
+
+            if (typeOfGoal == "Checklist goal")
+            {
+                timesOfAccomplishment = int.Parse(goalStringArray[4]);
+                timesToAccomplish = int.Parse(goalStringArray[5]);
+                bonusForAccomplishment = int.Parse(goalStringArray[6]);
+            }
+
         }
-
-        if (typeOfGoal == "1")
+            else
             {
-                Goal goal = new SimpleGoal(nameOfGoal, descriptionOfGoal, amountOfPoints);
+                status = false;
 
-                goals.Add(goal);
+                Console.Write("What is the name of your goal? ");
+                nameOfGoal = Console.ReadLine();
+
+                Console.Write("What is the short description of it? ");
+                descriptionOfGoal = Console.ReadLine();
+
+                Console.Write("What is the amount of points associated with this goal? ");
+                amountOfPoints = int.Parse(Console.ReadLine());
+
+
+
+                if (typeOfGoal == "3")
+                {
+                    timesOfAccomplishment = 0;
+                    timesToAccomplish = 0;
+                    bonusForAccomplishment = 0;
+
+                    Console.Write("Howe many time does this goal need to be accomplished for a bonus? ");
+                    timesToAccomplish = int.Parse(Console.ReadLine());
+
+                    Console.Write("What is the bonus for accomplishing it that many times? ");
+                    bonusForAccomplishment = int.Parse(Console.ReadLine());
+                }
             }
-            else if (typeOfGoal == "2")
-            {
-                EternalGoal eternalGoal = new EternalGoal(nameOfGoal, descriptionOfGoal, amountOfPoints);
+        
 
-                goals.Add(eternalGoal);
+        if (typeOfGoal == "1" || typeOfGoal == "Simple goal")
+            {
+                Goal goal = new SimpleGoal(status, nameOfGoal, descriptionOfGoal, amountOfPoints);
+
+                _goals.Add(goal);
             }
-            else if (typeOfGoal == "3")
+            else if (typeOfGoal == "2" || typeOfGoal == "Eternal goal")
             {
-                ChecklistGoal checklistGoal = new ChecklistGoal(nameOfGoal, descriptionOfGoal, amountOfPoints, timesToAccomplish, bonusForAccomplishment);
+                EternalGoal eternalGoal = new EternalGoal(status, nameOfGoal, descriptionOfGoal, amountOfPoints);
 
-                goals.Add(checklistGoal);
+                _goals.Add(eternalGoal);
+            }
+            else if (typeOfGoal == "3" || typeOfGoal == "Checklist goal")
+            {
+                ChecklistGoal checklistGoal = new ChecklistGoal(status, nameOfGoal, descriptionOfGoal, amountOfPoints, timesOfAccomplishment, timesToAccomplish, bonusForAccomplishment);
+
+                _goals.Add(checklistGoal);
             }
     }
 
@@ -96,7 +149,7 @@ class Program
         return false;
     }
 
-    static void DisplayNewGoalCreationMenuAndGetUserChoice(List<Goal> goals)
+    static void DisplayNewGoalCreationMenuAndGetUserChoice()
     {
         string typeOfGoal;
 
@@ -113,15 +166,15 @@ class Program
         switch (int.Parse(typeOfGoal))
         {
             case 1:
-                CreateGoal(typeOfGoal, goals);
+                CreateGoal(typeOfGoal);
                 Console.Clear();
                 break;
             case 2:
-                CreateGoal(typeOfGoal, goals);
+                CreateGoal(typeOfGoal);
                 Console.Clear();
                 break;
             case 3:
-                CreateGoal(typeOfGoal, goals);
+                CreateGoal(typeOfGoal);
                 Console.Clear();
                 break;
         }
@@ -129,11 +182,8 @@ class Program
 
     }
 
-    static void DisplayGoalsList(List<Goal> _goals)
+    static void DisplayGoalsList()
     {
-        
-        
-
         if (_goals.Count == 0)
         {
             Console.Write($"You have no goals yet.");
@@ -145,59 +195,69 @@ class Program
             for (int i = 0; i < _goals.Count; i++)
             {
                 Console.Write($"{i + 1} ");
-                Console.WriteLine($"{_goals[i].GoalInformation()}");
+                Console.WriteLine($"{_goals[i].GoalInformationForDisplay()}");
                 Console.WriteLine();
                 
             }
         }
 
-        DisplayPoints(0);
+        DisplayTotalPoints(_totalPoints);
     }
 
-    static void SaveToFile(string fileName, List<Goal> _goals)
+    static void SaveToFile(string fileName)
     {
-        /*using (StreamWriter outputFile = new StreamWriter(fileName))
-        {
-            for (int i = 0; i < _goals.Count; i++)
-            {
-                outputFile.WriteLine(_goals[i].GoalInformation());
-                outputFile.WriteLine();
-            }
-        }*/
-        /*using StreamWriter outputFile = new StreamWriter(fileName);
-        outputFile.WriteLine(JsonSerializer.Serialize(_goals));*/
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
+            outputFile.WriteLine(_totalPoints);
+
             for (int i = 0; i < _goals.Count; i++)
             {
-                string jsonString = JsonSerializer.Serialize(_goals[i]);
-                Console.WriteLine(jsonString);
-                Thread.Sleep(10000);
-                outputFile.WriteLine(jsonString);
+                outputFile.WriteLine(_goals[i].PrepareGoalToSaveToTxtFile());
             }
-        }
-        
+        }        
     }
 
-    static void ProcessingUserChoice(string choice, List<Goal> goals)
+    static void LoadGoalsFromFile(string fileName)
     {
+        string[] lines = System.IO.File.ReadAllLines(fileName);
+
+        SetTotalPoints(lines[0]);
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            string[] goal = lines[i].Split(": ");
+
+            CreateGoal(goal[0], goal[1]);
+        }
+    }
+
+    static string GetFileNameFromUser()
+    {
+        Console.Write("What is the file name for the goal file? ");
+        string fileName = Console.ReadLine();
+        return fileName;
+    }
+
+    static void ProcessingUserChoice(string choice)
+    {
+        
+
         switch (int.Parse(choice))
         {
             case 1:
-                DisplayNewGoalCreationMenuAndGetUserChoice(goals);
+                DisplayNewGoalCreationMenuAndGetUserChoice();
                 break;
             case 2:
-                DisplayGoalsList(goals);
+                DisplayGoalsList();
                 break;
             case 3:
-                Console.Write("What is the file name for the goal file? ");
-                string fileName = Console.ReadLine();
-                SaveToFile(fileName, goals);
+                nameOfFile = GetFileNameFromUser();
+                SaveToFile(nameOfFile);
                 Console.Clear();
                 break;
             case 4:
-                Console.Clear();
-
+                nameOfFile = GetFileNameFromUser();
+                LoadGoalsFromFile(nameOfFile);
                 Console.Clear();
                 break;
             case 5:
@@ -215,8 +275,7 @@ class Program
     {
         Console.WriteLine("Hello World! This is the EternalQuest Project.");
 
-        List<Goal> _goals = new List<Goal>();
-
+        
 
         string userChoice;
 
@@ -229,7 +288,7 @@ class Program
             userChoice = Console.ReadLine();
             if (userChoice == "1" || userChoice == "2" || userChoice == "3" || userChoice == "4" || userChoice == "5")
             {
-                ProcessingUserChoice(userChoice, _goals);
+                ProcessingUserChoice(userChoice);
             }
             else if (CheckChoice(userChoice, "mainMenu"))
             {

@@ -8,6 +8,6 @@ public class EternalGoal : Goal
     
     public override string PrepareGoalToSaveToTxtFile()
     {
-        return $"Eternal goal: {GetAchievedStatus()} {GetNameOfGoal()} {GetDescriptionOfGoal()} {GetAmountOfPoints()}";
+        return $"Eternal goal: {GetAchievedStatus()}, {GetNameOfGoal()}, {GetDescriptionOfGoal()}, {GetAmountOfPoints()}";
     }
 }
