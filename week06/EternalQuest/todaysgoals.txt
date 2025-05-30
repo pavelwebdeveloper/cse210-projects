@@ -1,5 +1,0 @@
-0
-Simple goal: False, Paris, To visit Paris with family, 50
-Eternal goal: False, Kiev temple, To attend Kiev temple with my family, 300
-Checklist goal: False, Cote d'Azur, To visit Cote d'Azure with my family, 150, 0, 5, 200
-Eternal goal: False, Frieberg temple, To visit Freiberg temple with my family, 250

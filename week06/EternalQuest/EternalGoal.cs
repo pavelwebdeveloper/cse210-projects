@@ -1,18 +1,23 @@
 
 public class EternalGoal : Goal
 {
-    public EternalGoal(bool status, string name, string description, int points) : base(status, name, description, points)
+    public EternalGoal(string name, string description, int points) : base(name, description, points)
     {
 
-    }
-
-    public override void SetAchievedStatus(bool status)
-    { 
-        
     }
     
-    public override string PrepareGoalToSaveToTxtFile()
+    public override bool IsComplete()
     {
-        return $"Eternal goal: {GetAchievedStatus()}, {GetNameOfGoal()}, {GetDescriptionOfGoal()}, {GetAmountOfPoints()}";
+        return false;
+    }
+
+    public override void RecordEvent()
+    {
+
+    }
+    
+    public override string GetStringRepresentation()
+    {
+        return $"Eternal goal: {GetNameOfGoal()}, {GetDescriptionOfGoal()}, {GetAmountOfPoints()}";
     }
 }

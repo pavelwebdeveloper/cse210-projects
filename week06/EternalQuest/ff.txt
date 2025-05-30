@@ -1,0 +1,5 @@
+495
+Simple goal: Goal1, Goal1 disc, 30, True
+Eternal goal: Goal2, goal2 disc, 60
+Checklist goal: checkl, checkl disc, 240, 3, 3, 150
+Checklist goal: book, read a book, 45, 1, 7, 900

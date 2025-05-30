@@ -1,19 +1,17 @@
 
 public abstract class Goal
 {
-    private bool _achievedStatus;
     private string _nameOfGoal;
     private string _descriptionOfGoal;
-    private int _amountOfPoints;
-    
+    protected int _points;
 
-    public Goal(bool status, string name, string description, int points)
+
+    public Goal(string name, string description, int points)
     {
-        _achievedStatus = status;
         _nameOfGoal = name;
         _descriptionOfGoal = description;
-        _amountOfPoints = points;
-        
+        _points = points;
+
     }
 
     public string GetNameOfGoal()
@@ -25,7 +23,7 @@ public abstract class Goal
     {
         _nameOfGoal = name;
     }
-    
+
 
     public string GetDescriptionOfGoal()
     {
@@ -37,37 +35,31 @@ public abstract class Goal
         _descriptionOfGoal = description;
     }
 
-    public int GetAmountOfPoints()
+    public virtual int GetAmountOfPoints()
     {
-        return _amountOfPoints;
+        return _points;
     }
 
     public void SetAmountOfPoints(int points)
     {
-        _amountOfPoints = points;
+        _points = points;
     }
-    
 
-    public bool GetAchievedStatus()
+
+    public abstract bool IsComplete();
+
+    public virtual void UpdateCompletenessSatus(bool complete)
     {
-        return _achievedStatus;
+
     }
 
-    public virtual void SetAchievedStatus(bool status)
-    { 
-            _achievedStatus = status;
-    }
-
-    public virtual string GoalInformationForDisplay()
+    public virtual string GetDetailsString()
     {
-        string achieved = (GetAchievedStatus()) ? "X" : " ";
+        string achieved = (IsComplete()) ? "X" : " ";
         return $"[{achieved}] {GetNameOfGoal()} ({GetDescriptionOfGoal()})";
     }
 
-    public virtual void UpdateTimesOfAccomplishment(int timesOfAccomplishment)
-    {
-        
-    }
+    public abstract string GetStringRepresentation();
 
-    public abstract string PrepareGoalToSaveToTxtFile();
+    public abstract void RecordEvent();
 }
