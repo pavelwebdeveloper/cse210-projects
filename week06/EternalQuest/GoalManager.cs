@@ -1,22 +1,24 @@
-
+using System;
+using System.IO;
 public class GoalManager
 {
     private static List<Goal> _goals = new List<Goal>();
     private static int _score = 0;
 
-    //private static string _nameOfFile;
-
-    public void Start(GoalManager goalManager)
+    public void Start()
     {
-        string userChoice;
+        string userChoice = "1";
 
         Console.Clear();
 
         do
         {
+            DisplayScore(GetScore());
+
             DisplayMenu();
             Console.Write("Select a choice from the menu: ");
             userChoice = Console.ReadLine();
+           
             Console.Clear();
             if (userChoice == "1" || userChoice == "2" || userChoice == "3" || userChoice == "4" || userChoice == "5")
             {
@@ -106,7 +108,6 @@ public class GoalManager
             else
             {
                 
-
                 Console.Write("What is the name of your goal? ");
                 nameOfGoal = Console.ReadLine();
 
@@ -193,8 +194,8 @@ public class GoalManager
         {
             Console.WriteLine("The types of Goals are: ");
             Console.WriteLine(" 1. Simple Goal");
-            Console.WriteLine(" 2. Eternal Goals");
-            Console.WriteLine(" 3. Checklist Goals");
+            Console.WriteLine(" 2. Eternal Goal");
+            Console.WriteLine(" 3. Checklist Goal");
             Console.Write("Which type of goal would you like to create? ");
             typeOfGoal = Console.ReadLine();
         } while (CheckChoice(typeOfGoal, "goalCreationMenu"));
@@ -218,14 +219,7 @@ public class GoalManager
 
     public void DisplayGoalsList(bool toRecordEvent = false)
     {
-        if (_goals.Count == 0)
-        {
-            Console.WriteLine();
-            Console.Write($"You have no goals yet.");
-            Console.WriteLine();
-        }
-        else
-        {
+        
             Console.WriteLine("The goals are:");
 
             for (int i = 0; i < _goals.Count; i++)
@@ -241,9 +235,6 @@ public class GoalManager
                 }
                 Console.WriteLine();
             }
-        }
-
-        DisplayScore(_score);
     }
 
     public void SaveGoals(string fileName)
@@ -289,8 +280,7 @@ public class GoalManager
         Console.Write($"Congratulations! You have earned {_goals[accomplishedGoalNumber - 1].GetAmountOfPoints()} points!");
         SetOrUpdateScore(_goals[accomplishedGoalNumber - 1].GetAmountOfPoints());
         DisplayScore(GetScore(), true);
-        
-        
+         
     }   
 
     public void ProcessingUserChoice(string choice)
@@ -309,7 +299,7 @@ public class GoalManager
                 break;
             case 4:
                 LoadGoals(GetFileNameFromUser());
-                //Console.Clear();
+                Console.Clear();
                 break;
             case 5:
                 RecordEvent();
