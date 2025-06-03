@@ -3,7 +3,6 @@ using System;
 
 public abstract class Activity
 {
-    //private static DateTime _dateObject = new DateTime();
     private string _date;
     private int _lengthOfActivityInMinutes;
     
@@ -24,15 +23,9 @@ public abstract class Activity
         return _date;
     }
 
-    public virtual double DistanceInKilometers()
-    {
-        return 0;
-    }
+    public abstract double DistanceInKilometers();
 
-    public virtual double SpeedInKilometersPerHour()
-    {
-        return 0;
-    }
+    public abstract double SpeedInKilometersPerHour();
 
     public abstract double PaceInMinutesPerKilometer();
 

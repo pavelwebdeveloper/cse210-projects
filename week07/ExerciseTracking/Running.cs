@@ -10,7 +10,7 @@ public class Running : Activity
         _distanceInKilometers = distance;
     }
 
-    public virtual double GetDistanceInKilometers()
+    public override double DistanceInKilometers()
     {
         return _distanceInKilometers;
     }
@@ -27,7 +27,7 @@ public class Running : Activity
 
     public override string GetSummary()
     {
-        return $"{GetDate()} Running ({GetLengthOfActivityInMinutes()} min): Distance {_distanceInKilometers} km, Speed: {SpeedInKilometersPerHour()} kph, Pace: {PaceInMinutesPerKilometer()} min per km";
+        return $"{GetDate()} Running ({GetLengthOfActivityInMinutes()} min): Distance {DistanceInKilometers()} km, Speed: {SpeedInKilometersPerHour()} kph, Pace: {PaceInMinutesPerKilometer()} min per km";
     }
 
 }

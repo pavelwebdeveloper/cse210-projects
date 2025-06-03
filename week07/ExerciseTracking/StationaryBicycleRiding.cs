@@ -14,6 +14,11 @@ public class StationaryBicycleRiding : Activity
         return Math.Round((double)_speedInKilometersPerHour / 60 * GetLengthOfActivityInMinutes());
     }
 
+    public override double SpeedInKilometersPerHour()
+    {
+        return _speedInKilometersPerHour;
+    }
+
 
     public override double PaceInMinutesPerKilometer()
     {
@@ -22,6 +27,6 @@ public class StationaryBicycleRiding : Activity
 
     public override string GetSummary()
     {
-        return $"{GetDate()} Riding a stationary bicycle ({GetLengthOfActivityInMinutes()} min): Distance {DistanceInKilometers()} km, Speed: {_speedInKilometersPerHour} kph, Pace: {PaceInMinutesPerKilometer()} min per km";
+        return $"{GetDate()} Riding a stationary bicycle ({GetLengthOfActivityInMinutes()} min): Distance {DistanceInKilometers()} km, Speed: {SpeedInKilometersPerHour()} kph, Pace: {PaceInMinutesPerKilometer()} min per km";
     }
 }
