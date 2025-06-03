@@ -3,26 +3,26 @@
 public class LapPoolSwimming : Activity
 {
     private int _numberOfLaps;
-    private int _lengthOfLap;
+    private int _lengthOfLapInMeters;
 
-    public LapPoolSwimming(string date, int length, int laps) : Base (date, length)
+    public LapPoolSwimming(string date, int length, int laps) : base (date, length)
     {
         _numberOfLaps = laps;
-        _lengthOfLapInMeters = 0,05;
+        _lengthOfLapInMeters = 50;
     }
 
-    public override int DistanceInKilometers(){
+    public override double DistanceInKilometers(){
         return _numberOfLaps * _lengthOfLapInMeters / 1000;
     }
 
-    public override int SpeedInKilometersPerHour()
+    public override double SpeedInKilometersPerHour()
     {
-        return DistanceInKilometers() / GetLengthOfActivityInMinutes() * 60;
+        return Math.Round((double)DistanceInKilometers() / GetLengthOfActivityInMinutes() * 60);
     }
 
-    public override int PaceInMinutesPerKilometer()
+    public override double PaceInMinutesPerKilometer()
     {
-        return 60 / SpeedInKilometersPerHour();
+        return Math.Round((double)60 / SpeedInKilometersPerHour());
     }
 
     public override string GetSummary()

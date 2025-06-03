@@ -4,20 +4,20 @@ public class StationaryBicycleRiding : Activity
 {
     private int _speedInKilometersPerHour;
 
-    public StationaryBicycleRiding(string date, int length, int speed) : Base (date, length)
+    public StationaryBicycleRiding(string date, int length, int speed) : base (date, length)
     {
         _speedInKilometersPerHour = speed;
     }
 
-    public override int DistanceInKilometers()
+    public override double DistanceInKilometers()
     {
-        return _SpeedInKilometersPerHour / 60 * GetLengthOfActivityInMinutes();
+        return Math.Round((double)_speedInKilometersPerHour / 60 * GetLengthOfActivityInMinutes());
     }
 
 
-    public override int PaceInMinutesPerKilometer()
+    public override double PaceInMinutesPerKilometer()
     {
-        return _lengthOfActivityInMinutes / DistanceInKilometers();
+        return Math.Round((double)GetLengthOfActivityInMinutes() / DistanceInKilometers());
     }
 
     public override string GetSummary()

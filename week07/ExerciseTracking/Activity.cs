@@ -1,10 +1,10 @@
 using System;
 
 
-public class Activity
+public abstract class Activity
 {
-    private DateTime _dateObject = new DateTime();
-    //private string _date = _dateObject.;
+    //private static DateTime _dateObject = new DateTime();
+    private string _date;
     private int _lengthOfActivityInMinutes;
     
 
@@ -24,17 +24,17 @@ public class Activity
         return _date;
     }
 
-    public virtual int DistanceInKilometers()
+    public virtual double DistanceInKilometers()
     {
         return 0;
     }
 
-    public virtual int SpeedInKilometersPerHour()
+    public virtual double SpeedInKilometersPerHour()
     {
         return 0;
     }
 
-    public abstract int PaceInMinutesPerKilometer();
+    public abstract double PaceInMinutesPerKilometer();
 
     public abstract string GetSummary();
 
